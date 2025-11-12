@@ -1,6 +1,7 @@
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
+import { db, usersTable } from '@repo/db';
 
 type Props = Omit<ImageProps, "src"> & {
   srcLight: string;
@@ -18,7 +19,10 @@ const ThemeImage = (props: Props) => {
   );
 };
 
-export default function Home() {
+export default async function Home() {
+  console.log(process.env.DATABASE_URL)
+  console.log(await db.select().from(usersTable))
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
